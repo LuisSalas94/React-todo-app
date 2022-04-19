@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import AddItem from "./components/AddItem";
 import Content from "./components/Content";
+import Header from "./components/Header";
+import SearchItem from "./components/SearchItem";
 
 function App() {
 	const [items, setItems] = useState([
@@ -23,6 +25,8 @@ function App() {
 	]);
 
 	const [newItem, setNewItem] = useState("");
+
+	const [search, setSearch] = useState("");
 
 	const handleDelete = (id) => {
 		const listItems = items.filter((item) => item.id !== id);
@@ -54,13 +58,17 @@ function App() {
 
 	return (
 		<div className="App">
+			<Header items={items} />
+			<SearchItem search={search} setSearch={setSearch} />
 			<AddItem
 				newItem={newItem}
 				setNewItem={setNewItem}
 				handleNewItem={handleNewItem}
 			/>
 			<Content
-				items={items}
+				items={items.filter((item) =>
+					item.item.toLowerCase().includes(search.toLowerCase())
+				)}
 				handleDelete={handleDelete}
 				handleChange={handleChange}
 			/>
