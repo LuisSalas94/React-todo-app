@@ -6,23 +6,9 @@ import Header from "./components/Header";
 import SearchItem from "./components/SearchItem";
 
 function App() {
-	const [items, setItems] = useState([
-		{
-			id: 1,
-			checked: true,
-			item: "play videogames",
-		},
-		{
-			id: 2,
-			checked: false,
-			item: "read a book",
-		},
-		{
-			id: 3,
-			checked: false,
-			item: "walk the dog",
-		},
-	]);
+	const [items, setItems] = useState(
+		JSON.parse(localStorage.getItem("todolist"))
+	);
 
 	const [newItem, setNewItem] = useState("");
 
